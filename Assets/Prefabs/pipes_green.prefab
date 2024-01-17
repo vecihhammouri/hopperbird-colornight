@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1450479181
-  m_SortingLayer: 5
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: -957091490, guid: c4b81458690b04cafa05d7979c398cee, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -202,7 +202,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1450479181
-  m_SortingLayer: 5
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: -957091490, guid: c4b81458690b04cafa05d7979c398cee, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -328,7 +328,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.1, y: 0}
+  m_Offset: {x: 1.8, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -353,6 +353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a894c957a02e84376ae731e96ee90d4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreSound: {fileID: 8300000, guid: 819d5c7d2d63b4f99911cb5d259c2f45, type: 3}
 --- !u!114 &2097360514154564833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -365,4 +366,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 331974b4c0cc0453fbc61e0cd86ed686, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pipesOffset: 25
+  pipesOffset: 24

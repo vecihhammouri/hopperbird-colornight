@@ -1,4 +1,4 @@
-using TMPro;
+using _Scripts.GamePlay.Player;
 using UnityEngine;
 
 namespace _Scripts.Manager
@@ -6,43 +6,13 @@ namespace _Scripts.Manager
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance;
-        
         public bool gameOver;
         private uint _score = 0;
         private static uint _bestScore = 0;
         
         [SerializeField] private float scrollSpeed = 1.8f;
-        
-        [SerializeField] private GameObject gameOverObject;
-        
-        private Animator _animator;
         private static readonly int GameOverAnim = Animator.StringToHash("GameOver");
-        
-        public GameObject muteButton;
-        public GameObject unmuteButton;
-        
-        #region On Game UI Items
 
-        public GameObject pauseButton;
-        public GameObject resumeButton;
-        public TMP_Text scoreOnGame;
-        
-        #endregion
-        
-        #region Game Over UI Items
-
-        private GameObject _gameOver;
-        public GameObject playButton;   
-        public GameObject gameOverImage;
-        public GameObject scoreImage;
-        public TMP_Text gameOverScoreText;
-        public TMP_Text bestScoreText;
-        public GameObject newImage;
-        public GameObject medalGoldImage;
-        public GameObject medalSilverImage;
-
-        #endregion
-        
 
         private void Singleton()
         {
@@ -56,28 +26,19 @@ namespace _Scripts.Manager
         private void Awake()
         {
             Singleton();
-            _animator = gameOverObject.GetComponent<Animator>();
         }
-        
 
+        public void GetReady()
+        {
+            UIManager.Instance.HideOnGameUI();
+            UIManager.Instance.HideGameOverUI();
+        }
         public void StartGame()
         {
-            HideGameOverUI();
+            UIManager.Instance.HideGameOverUI();
+            UIManager.Instance.getReadyUI = true;
         }
-
-        private void HideGameOverUI()
-        {
-            playButton.SetActive(false);
-            gameOverImage.SetActive(false);
-            scoreImage.SetActive(false);
-            gameOverScoreText.text = "0";//
-            bestScoreText.text = "0";//
-            newImage.SetActive(false);
-            medalGoldImage.SetActive(false);
-            medalSilverImage.SetActive(false);
-            pauseButton.SetActive(true);
-            resumeButton.SetActive(false);
-        }
+        
 
 
         public void GameOver()
@@ -85,36 +46,23 @@ namespace _Scripts.Manager
             gameOver = true;
             NewBestScoreCheck();
 
-            ShowGameOverUI();
-            HideOnGameUI();
+            UIManager.Instance.ShowGameOverUI();
+            UIManager.Instance.HideOnGameUI();
             
-            gameOverScoreText.text = _score.ToString();//
-            bestScoreText.text = _bestScore.ToString();//
+            UIManager.Instance.gameOverScoreText.text = _score.ToString();//
+            UIManager.Instance.bestScoreText.text = _bestScore.ToString();//
             ScoreCheckForMedal();
-            
-            _animator.SetBool(GameOverAnim,true);
+
+            UIManager.Instance.gameOverObject.GetComponent<Animator>().SetBool(GameOverAnim,true);
         }
 
-        private void HideOnGameUI()
-        {
-            pauseButton.SetActive(false);
-            resumeButton.SetActive(false);
-        }
-
-        private void ShowGameOverUI()
-        {
-            playButton.SetActive(true);
-            gameOverImage.SetActive(true);
-            scoreImage.SetActive(true);
-        }
+        
 
         private void NewBestScoreCheck()
         {
-            if (_score > _bestScore)
-            {
-                _bestScore = _score;
-                newImage.SetActive(true);
-            }
+            if (_score <= _bestScore) return;
+            _bestScore = _score;
+            UIManager.Instance.newImage.SetActive(true);
         }
 
         private void ScoreCheckForMedal()
@@ -122,12 +70,12 @@ namespace _Scripts.Manager
             switch (_score)
             {
                 case > 20 and < 50:
-                    medalSilverImage.SetActive(true);
-                    medalGoldImage.SetActive(false);
+                    UIManager.Instance.medalSilverImage.SetActive(true);
+                    UIManager.Instance.medalGoldImage.SetActive(false);
                     break;
                 case > 50:
-                    medalGoldImage.SetActive(false);
-                    medalSilverImage.SetActive(false);
+                    UIManager.Instance.medalGoldImage.SetActive(false);
+                    UIManager.Instance.medalSilverImage.SetActive(false);
                     break;
             }
         }
@@ -144,13 +92,25 @@ namespace _Scripts.Manager
                 return;
             }
             _score++;
-            scoreOnGame.text = _score.ToString();
+            UIManager.Instance.scoreOnGame.text = _score.ToString();
         }
-        
-        
-        private void OnApplicationPause(bool pauseStatus)
+
+        public void PauseGame()
         {
-            //throw new NotImplementedException();
+            BirdController.Instance.SetVelocityResume();
+            Time.timeScale = 0;
         }
+
+        public void ResumeGame()
+        {
+            Time.timeScale = 1;
+        }
+
+        
+        
+        /*private void OnApplicationPause(bool pauseStatus)
+        {
+            PauseGame();
+        }*/
     }
 }

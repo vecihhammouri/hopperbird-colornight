@@ -22,8 +22,14 @@ namespace _Scripts.GamePlay
 
         private void Update()
         {
-            if(GameManager.Instance.gameOver)
-                return;
+            if (!StartGameScene.GetReady)
+            {
+                if (GameManager.Instance.gameOver)
+                {
+                    return;
+                }
+            }
+
             MoveParallaxLayers();
 
             if (_position.x < -_horizontalLength)

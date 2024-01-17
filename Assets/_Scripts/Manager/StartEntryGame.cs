@@ -7,6 +7,7 @@ namespace _Scripts.Manager
     {
         public void StartGetReady()
         {
+            UIManager.Instance.getReadyUI = true;
             SceneManager.LoadScene(0);
         }
     }

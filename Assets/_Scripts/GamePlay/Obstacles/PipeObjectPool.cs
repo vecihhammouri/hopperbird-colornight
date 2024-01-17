@@ -21,7 +21,7 @@ namespace _Scripts.GamePlay.Obstacles
         [SerializeField] private float spawnRate = 4.0f;
 
         [SerializeField] private float minimumYPosition = -1.0f;
-        [SerializeField] private float maximumYPosition = 3.3f;
+        [SerializeField] private float maximumYPosition = 3.0f;
         
         private float _spawnPipeXPosition;
         public static float SpawnPipeYPosition;
