@@ -53,11 +53,11 @@ TagManager:
   - name: Grass
     uniqueID: 2472555427
     locked: 0
-  - name: Base
-    uniqueID: 1698225161
-    locked: 0
   - name: Pipes
     uniqueID: 2844488115
+    locked: 0
+  - name: Base
+    uniqueID: 1698225161
     locked: 0
   - name: Player
     uniqueID: 622436461
