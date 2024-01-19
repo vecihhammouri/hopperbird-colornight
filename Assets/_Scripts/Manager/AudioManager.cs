@@ -1,8 +1,8 @@
-using System.Collections;
 using UnityEngine;
 
 namespace _Scripts.Manager
 {
+    [RequireComponent(typeof(AudioSource))]
     public class AudioManager : MonoBehaviour
     {
         public static AudioManager Instance;
@@ -27,7 +27,7 @@ namespace _Scripts.Manager
         public void PlaySound(AudioClip clip)
         {
             if (GameManager.Instance.gameOver) return;
-  
+
             audioSource.PlayOneShot(clip);
         }
         public void Mute()
@@ -41,5 +41,6 @@ namespace _Scripts.Manager
             UIManager.Instance.UnMuteButton();
             audioSource.mute = false;
         }
+        
     }
 }

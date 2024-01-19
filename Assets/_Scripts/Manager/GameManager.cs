@@ -10,7 +10,7 @@ namespace _Scripts.Manager
         public bool gamePaused;
         private uint _score = 0;
         private static uint _bestScore = 0;
-        
+        private const string BestScoreKey = "BestScore";
         [SerializeField] private float scrollSpeed = 1.8f;
         private static readonly int GameOverAnim = Animator.StringToHash("GameOver");
 
@@ -29,10 +29,15 @@ namespace _Scripts.Manager
             Singleton();
         }
 
+        private void Start()
+        {
+            _bestScore = (uint)LoadBestScore();
+        }
+
         public void GetReady()
         {
             UIManager.Instance.HideOnGameUI();
-            UIManager.Instance.HideGameOverUI();
+            //UIManager.Instance.HideGameOverUI();
         }
         public void StartGame()
         {
@@ -50,8 +55,8 @@ namespace _Scripts.Manager
             UIManager.Instance.ShowGameOverUI();
             UIManager.Instance.HideOnGameUI();
             
-            UIManager.Instance.gameOverScoreText.text = _score.ToString();//
-            UIManager.Instance.bestScoreText.text = _bestScore.ToString();//
+            UIManager.Instance.gameOverScoreText.text = _score.ToString();
+            UIManager.Instance.bestScoreText.text = _bestScore.ToString();
             ScoreCheckForMedal();
             UIManager.Instance.gameOverObject.SetActive(true);
             UIManager.Instance.gameOverObject.GetComponent<Animator>().SetBool(GameOverAnim,true);
@@ -63,21 +68,31 @@ namespace _Scripts.Manager
         {
             if (_score <= _bestScore) return;
             _bestScore = _score;
+            SaveBestScore(_bestScore);
             UIManager.Instance.newImage.SetActive(true);
         }
 
+        private static void SaveBestScore(uint bestScore)
+        {
+            PlayerPrefs.SetInt(BestScoreKey, (int)bestScore);
+            PlayerPrefs.Save();
+        }
+        private static int LoadBestScore()
+        {
+            return PlayerPrefs.GetInt(BestScoreKey, 0);
+        }
+        
         private void ScoreCheckForMedal()
         {
-            switch (_score)
+            if (_score is >= 20 and < 50)
             {
-                case > 20 and < 50:
-                    UIManager.Instance.medalSilverImage.SetActive(true);
-                    UIManager.Instance.medalGoldImage.SetActive(false);
-                    break;
-                case > 50:
-                    UIManager.Instance.medalGoldImage.SetActive(false);
-                    UIManager.Instance.medalSilverImage.SetActive(false);
-                    break;
+                UIManager.Instance.medalSilverImage.SetActive(true);
+                UIManager.Instance.medalGoldImage.SetActive(false);
+            }
+            else if (_score > 50)
+            {
+                UIManager.Instance.medalGoldImage.SetActive(false);
+                UIManager.Instance.medalSilverImage.SetActive(false);
             }
         }
 

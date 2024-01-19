@@ -11,12 +11,14 @@ namespace _Scripts.GamePlay
         private float _toleranceSpriteSize;
         private Transform _transform;
         private Vector3 _position;
+        private const float BackgroundMultiplier = 2.0f; 
    
         private void Start()
         {
+            
             _transform = transform;
-            _toleranceSpriteSize = transform.GetChild(1).transform.localPosition.x;
-            _horizontalLength = (_transform.childCount+1) * _toleranceSpriteSize;
+            _toleranceSpriteSize = CalculateSecondChildXPosition();
+            _horizontalLength = (transform.childCount + 1) * _toleranceSpriteSize;
             _position = _transform.position;
         }
 
@@ -44,11 +46,19 @@ namespace _Scripts.GamePlay
             transform.position = _position;
         }
 
+
+        private float CalculateSecondChildXPosition()
+        {
+            if (transform.childCount < 2 || transform.GetChild(1) == null) return 0;
+     
+            return transform.GetChild(1).localPosition.x;
+
+        }
+        
         private void RepositionParallaxLayer()
         {
-    
-            Vector3 horizontalLengthOffset = new Vector3(_horizontalLength * 2.0f, 0,0);
-            _position += horizontalLengthOffset;
+            
+            _position.x += _horizontalLength * BackgroundMultiplier;
             transform.position = _position;
         }
         

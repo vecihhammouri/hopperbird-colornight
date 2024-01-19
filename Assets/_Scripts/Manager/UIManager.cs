@@ -34,13 +34,16 @@ namespace _Scripts.Manager
         public GameObject newImage;
         public GameObject medalGoldImage;
         public GameObject medalSilverImage;
+        
 
         #endregion
 
         private void Awake()
         {
             Singleton();
+            NullChecks();
         }
+        
         
         private void Singleton()
         {
@@ -51,6 +54,19 @@ namespace _Scripts.Manager
 
             Instance = this;
         }
+
+        private void NullChecks()
+        {
+            if (muteButton == null || unmuteButton == null || pauseButton == null ||
+                resumeButton == null || scoreOnGame == null || gameOverObject == null ||
+                playButton == null || gameOverImage == null || scoreImage == null ||
+                gameOverScoreText == null || bestScoreText == null || newImage == null ||
+                medalGoldImage == null || medalSilverImage == null)
+            {
+                Debug.LogError("One or more UI elements are not assigned!");
+            }
+        }
+        
 
         public void HideOnGameUI()
         {

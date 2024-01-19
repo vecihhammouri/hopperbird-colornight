@@ -10,13 +10,13 @@ namespace _Scripts.Manager
         {
             if (Input.GetMouseButtonDown(0))
             {
-                GetReady = false;
                 StartGamePlay();
             }
         }
 
         private static void StartGamePlay()
         {
+            GetReady = false;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
