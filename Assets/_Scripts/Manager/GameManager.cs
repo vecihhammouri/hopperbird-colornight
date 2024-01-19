@@ -7,6 +7,7 @@ namespace _Scripts.Manager
     {
         public static GameManager Instance;
         public bool gameOver;
+        public bool gamePaused;
         private uint _score = 0;
         private static uint _bestScore = 0;
         
@@ -52,7 +53,7 @@ namespace _Scripts.Manager
             UIManager.Instance.gameOverScoreText.text = _score.ToString();//
             UIManager.Instance.bestScoreText.text = _bestScore.ToString();//
             ScoreCheckForMedal();
-
+            UIManager.Instance.gameOverObject.SetActive(true);
             UIManager.Instance.gameOverObject.GetComponent<Animator>().SetBool(GameOverAnim,true);
         }
 
@@ -99,10 +100,12 @@ namespace _Scripts.Manager
         {
             BirdController.Instance.SetVelocityResume();
             Time.timeScale = 0;
+            gamePaused = true;
         }
 
         public void ResumeGame()
         {
+            gamePaused = false;
             Time.timeScale = 1;
         }
 

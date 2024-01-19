@@ -24,10 +24,10 @@ namespace _Scripts.Manager
             audioSource = GetComponent<AudioSource>();
         }
     
-        public IEnumerator PlaySound(AudioClip clip)
+        public void PlaySound(AudioClip clip)
         {
-            if (GameManager.Instance.gameOver) yield break;
-            yield return new WaitUntil(() => AudioManager.Instance.audioSource.isPlaying == false);
+            if (GameManager.Instance.gameOver) return;
+  
             audioSource.PlayOneShot(clip);
         }
         public void Mute()

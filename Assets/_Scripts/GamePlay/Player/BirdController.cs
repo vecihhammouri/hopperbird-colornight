@@ -61,17 +61,38 @@ namespace _Scripts.GamePlay.Player
         private void CheckInput()
         {
             if (_isDead) return;
-            if(EventSystem.current.IsPointerOverGameObject()) return;
+            //if(EventSystem.current.IsPointerOverGameObject()) return;
+            if(CheckInputIsUI()) return;
             if (Input.GetMouseButtonDown(0))
             {
                 _jumping = true;
             }
         }
 
+        private bool CheckInputIsUI()
+        {
+            if (Input.touchCount > 0)
+            {
+                Touch touch = Input.GetTouch(0);
+
+                if (touch.phase != TouchPhase.Began) return false;
+                if (EventSystem.current.IsPointerOverGameObject(touch.fingerId))
+                {
+                    return true;
+                }
+                if (GameManager.Instance.gamePaused)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         private void Jump()
         {
             _animator.SetTrigger(Flap);
-            StartCoroutine(AudioManager.Instance.PlaySound(flapSound));
+            AudioManager.Instance.PlaySound(flapSound);
             _rigidBody2D.velocity = Vector2.zero;
             _rigidBody2D.AddForce(new Vector2(0,jumpForce));
             _jumping = false;
@@ -90,14 +111,14 @@ namespace _Scripts.GamePlay.Player
             _animator.SetTrigger(Died);
             if (!_hitSoundPlayed)
             {
-                StartCoroutine(AudioManager.Instance.PlaySound(hitSound));
+                AudioManager.Instance.PlaySound(hitSound);
                 _hitSoundPlayed = true;
             }
 
             
             if (!_dieSoundPlayed)
             {
-                StartCoroutine(AudioManager.Instance.PlaySound(dieSound));
+                AudioManager.Instance.PlaySound(dieSound);
                 _dieSoundPlayed = true;
             }
             
