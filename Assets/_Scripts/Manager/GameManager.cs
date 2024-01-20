@@ -126,9 +126,11 @@ namespace _Scripts.Manager
 
         
         
-        /*private void OnApplicationPause(bool pauseStatus)
+        private void OnApplicationPause(bool pauseStatus)
         {
+            if(gameOver) return;
             PauseGame();
-        }*/
+            UIManager.Instance.PauseButtonClick();
+        }
     }
 }
