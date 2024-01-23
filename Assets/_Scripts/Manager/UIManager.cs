@@ -9,6 +9,7 @@ namespace _Scripts.Manager
         
         public bool getReadyUI;
         
+        
         public GameObject muteButton;
         public GameObject unmuteButton;
         
@@ -38,13 +39,6 @@ namespace _Scripts.Manager
 
         #endregion
 
-        private void Awake()
-        {
-            Singleton();
-            NullChecks();
-        }
-        
-        
         private void Singleton()
         {
             if (Instance != null && Instance != this)
@@ -54,6 +48,13 @@ namespace _Scripts.Manager
 
             Instance = this;
         }
+        
+        private void Awake()
+        {
+            Singleton();
+            NullChecks();
+        }
+
 
         private void NullChecks()
         {
@@ -111,7 +112,7 @@ namespace _Scripts.Manager
             unmuteButton.SetActive(true);
         }
 
-        public void UnMuteButton()
+        public void UnMuteButtonClick()
         {
             unmuteButton.SetActive(false);
             muteButton.SetActive(true);
