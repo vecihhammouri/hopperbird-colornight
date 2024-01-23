@@ -1,6 +1,6 @@
 using _Scripts.GamePlay.Player;
 using UnityEngine;
-
+using DG.Tweening;
 namespace _Scripts.Manager
 {
     public class GameManager : MonoBehaviour
@@ -13,6 +13,11 @@ namespace _Scripts.Manager
         private const string BestScoreKey = "BestScore";
         [SerializeField] private float scrollSpeed = 1.8f;
         private static readonly int GameOverAnim = Animator.StringToHash("GameOver");
+        
+        [SerializeField] private new Camera camera;
+        
+        [SerializeField] private float cameraShakeTime = 0.1f;
+        [SerializeField] private float cameraShakePower = 0.1f;
 
 
         private void Singleton()
@@ -49,6 +54,10 @@ namespace _Scripts.Manager
 
         public void GameOver()
         {
+            if (!gameOver)
+            {
+                camera.DOShakePosition(cameraShakeTime, cameraShakePower);
+            }
             gameOver = true;
             NewBestScoreCheck();
 

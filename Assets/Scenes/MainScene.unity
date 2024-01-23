@@ -389,6 +389,9 @@ MonoBehaviour:
   gameOver: 0
   gamePaused: 0
   scrollSpeed: 1.8
+  camera: {fileID: 1827947404}
+  cameraShakeTime: 0.1
+  cameraShakePower: 0.1
 --- !u!114 &113957858
 MonoBehaviour:
   m_ObjectHideFlags: 0
