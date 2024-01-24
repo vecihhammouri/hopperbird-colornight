@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace _Scripts.Manager
 {
@@ -7,8 +6,9 @@ namespace _Scripts.Manager
     {
         public void StartGetReady()
         {
-            UIManager.Instance.getReadyUI = true;
-            SceneManager.LoadScene(0);
+            //SceneManager.LoadScene(0);
+
+            GameManager.Instance.GetReady();
         }
     }
 }

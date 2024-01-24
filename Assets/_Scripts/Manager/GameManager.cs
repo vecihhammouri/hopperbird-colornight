@@ -1,11 +1,15 @@
 using _Scripts.GamePlay.Player;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
+
 namespace _Scripts.Manager
 {
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance;
+        public GameObject player;
+        public GameObject pipeManager;
         public bool gameOver;
         public bool gamePaused;
         private uint _score = 0;
@@ -14,7 +18,7 @@ namespace _Scripts.Manager
         [SerializeField] private float scrollSpeed = 1.8f;
         private static readonly int GameOverAnim = Animator.StringToHash("GameOver");
         
-        [SerializeField] private new Camera camera;
+        [SerializeField] private Camera camera;
         
         [SerializeField] private float cameraShakeTime = 0.1f;
         [SerializeField] private float cameraShakePower = 0.1f;
@@ -41,13 +45,22 @@ namespace _Scripts.Manager
 
         public void GetReady()
         {
-            UIManager.Instance.HideOnGameUI();
-            //UIManager.Instance.HideGameOverUI();
+            //UIManager.Instance.HideOnGameUI();
+            UIManager.Instance.audioSettingsPanel.SetActive(false);
+            SceneManager.LoadScene(0);
+
+
+            //UIManager.Instance.HideGameOverUI();*/*/*/* zaten commentti
         }
         public void StartGame()
         {
-            UIManager.Instance.HideGameOverUI();
-            UIManager.Instance.getReadyUI = true;
+            //UIManager.Instance.HideGameOverUI();
+            UIManager.Instance.audioSettingsPanel.SetActive(true);
+            player.SetActive(true);
+            pipeManager.SetActive(true);
+            UIManager.Instance.onGamePanel.SetActive(true);
+            UIManager.Instance.getReadyPanel.SetActive(false);
+            
         }
         
 

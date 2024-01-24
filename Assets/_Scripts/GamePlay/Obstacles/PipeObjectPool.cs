@@ -1,3 +1,4 @@
+using System;
 using _Scripts.Manager;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -30,11 +31,15 @@ namespace _Scripts.GamePlay.Obstacles
         private byte _currentPipe = 0;
 
         #endregion
-        
-        private void Start()
+
+        private void OnEnable()
         {
             InstantiatePool();
         }
+        /*private void Start()
+        {
+            InstantiatePool();
+        }*/
 
         private void InstantiatePool()
         {

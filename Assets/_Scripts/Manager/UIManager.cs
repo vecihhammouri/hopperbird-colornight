@@ -7,7 +7,10 @@ namespace _Scripts.Manager
     {
         public static UIManager Instance;
         
-        public bool getReadyUI;
+        public GameObject getReadyPanel;
+        public GameObject onGamePanel;
+        public GameObject gameOverPanel;
+        public GameObject audioSettingsPanel;
         
         
         public GameObject muteButton;
@@ -58,7 +61,7 @@ namespace _Scripts.Manager
 
         private void NullChecks()
         {
-            if (muteButton == null || unmuteButton == null || pauseButton == null ||
+            if (getReadyPanel == null || onGamePanel == null || muteButton == null || unmuteButton == null || pauseButton == null ||
                 resumeButton == null || scoreOnGame == null || gameOverObject == null ||
                 playButton == null || gameOverImage == null || scoreImage == null ||
                 gameOverScoreText == null || bestScoreText == null || newImage == null ||
