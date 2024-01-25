@@ -46,6 +46,7 @@ namespace _Scripts.Manager
         public void GetReady()
         {
             //UIManager.Instance.HideOnGameUI();
+            scrollSpeed = 1.8f;
             UIManager.Instance.audioSettingsPanel.SetActive(false);
             SceneManager.LoadScene(0);
 
@@ -67,6 +68,7 @@ namespace _Scripts.Manager
 
         public void GameOver()
         {
+            scrollSpeed = 0f;
             if (!gameOver)
             {
                 camera.DOShakePosition(cameraShakeTime, cameraShakePower);
