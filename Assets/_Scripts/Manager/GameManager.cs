@@ -148,7 +148,10 @@ namespace _Scripts.Manager
             Time.timeScale = 1;
         }
 
-        
+        public int GetScore()
+        {
+            return (int)_score;
+        }
         
         private void OnApplicationPause(bool pauseStatus)
         {
@@ -156,5 +159,6 @@ namespace _Scripts.Manager
             PauseGame();
             UIManager.Instance.PauseButtonClick();
         }
+        
     }
 }
