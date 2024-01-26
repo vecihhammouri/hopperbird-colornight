@@ -18,7 +18,7 @@ namespace _Scripts.Manager
         [SerializeField] private float scrollSpeed = 1.8f;
         private static readonly int GameOverAnim = Animator.StringToHash("GameOver");
         
-        [SerializeField] private Camera camera;
+        [SerializeField] private new Camera camera;
         
         [SerializeField] private float cameraShakeTime = 0.1f;
         [SerializeField] private float cameraShakePower = 0.1f;
@@ -45,17 +45,14 @@ namespace _Scripts.Manager
 
         public void GetReady()
         {
-            //UIManager.Instance.HideOnGameUI();
             scrollSpeed = 1.8f;
             UIManager.Instance.audioSettingsPanel.SetActive(false);
             SceneManager.LoadScene(0);
 
-
-            //UIManager.Instance.HideGameOverUI();*/*/*/* zaten commentti
+            
         }
         public void StartGame()
         {
-            //UIManager.Instance.HideGameOverUI();
             UIManager.Instance.audioSettingsPanel.SetActive(true);
             player.SetActive(true);
             pipeManager.SetActive(true);

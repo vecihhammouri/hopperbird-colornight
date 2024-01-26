@@ -6,8 +6,6 @@ namespace _Scripts.Manager
     {
         public void StartGetReady()
         {
-            //SceneManager.LoadScene(0);
-
             GameManager.Instance.GetReady();
         }
     }
