@@ -4,7 +4,7 @@ Hopper Bird: Color Night
 Hopper Bird: Color Night is a  game of flappy bird clone which is popular game.
 
 - Online real leaderboard
-- Google Analytics - Firebase Crashlytics(A real time crash reporting tool)
+- Unity Analytics - Unity Crashlytics
 - Infinite scrolling background with parallax effect
 
 
