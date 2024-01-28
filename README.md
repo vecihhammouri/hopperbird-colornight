@@ -1,7 +1,7 @@
 # hopperbird-colornight
 Hopper Bird: Color Night
 
-Hopper Bird: Color Night is a  game of flappy bird clone which is popular game.
+Hopper Bird: Color Night is a clone of the popular Flappy Bird mobile game, in which we fly through pipes without falling or crashing.
 
 - Online real leaderboard
 - Unity Analytics - Unity Crashlytics
